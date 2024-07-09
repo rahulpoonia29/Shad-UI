@@ -12,24 +12,18 @@ import { OneBlock, NodeOneBlock, NodeTwoBlocks } from "./layout";
 import { NodeButton } from "./button";
 import { NodeCard } from "./card";
 import { Element } from "@craftjs/core";
+import { NodeAlert } from "./alert";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Terminal } from "lucide-react";
+import { NodeBadge } from "./badge";
+import { Badge } from "../ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { NodeAvatar } from "./avatar";
 
 export type Components = {
 	name: string;
 	items: {
 		name: string;
-		props?: {
-			variant?:
-				| "link"
-				| "default"
-				| "destructive"
-				| "outline"
-				| "secondary"
-				| "ghost"
-				| null
-				| undefined;
-			className?: string;
-			children?: ReactNode | string;
-		};
 		node: ReactElement;
 		demo?: ReactNode;
 	}[];
@@ -46,13 +40,12 @@ export const componentsMap: Components[] = [
 			},
 			{
 				name: "Outline",
-				props: { variant: "outline", children: "Outline" },
 				demo: <Button variant={"outline"}>Outline</Button>,
 				node: <NodeButton variant={"outline"}>Outline</NodeButton>,
 			},
 			{
 				name: "Destructive",
-				props: { variant: "destructive", children: "Destructive" },
+
 				demo: <Button variant={"destructive"}>Destructive</Button>,
 				node: (
 					<NodeButton variant={"destructive"}>Destructive</NodeButton>
@@ -78,6 +71,95 @@ export const componentsMap: Components[] = [
 					</Card>
 				),
 				node: <NodeCard></NodeCard>,
+			},
+		],
+	},
+	{
+		name: "Alerts",
+		items: [
+			{
+				name: "Default",
+				demo: (
+					<Alert>
+						<Terminal />
+						<AlertTitle>Alert Title</AlertTitle>
+						<AlertDescription>Alert Description</AlertDescription>
+					</Alert>
+				),
+				node: (
+					<NodeAlert
+						alertTitle="Title"
+						alertDescription="Description"
+					/>
+				),
+			},
+			{
+				name: "Destructive",
+				demo: (
+					<Alert variant={"destructive"}>
+						<Terminal />
+						<AlertTitle>Alert Title</AlertTitle>
+						<AlertDescription>Alert Description</AlertDescription>
+					</Alert>
+				),
+				node: (
+					<NodeAlert
+						alertTitle="Title"
+						alertDescription="Description"
+						variant={"destructive"}
+					/>
+				),
+			},
+		],
+	},
+	{
+		name: "Badge",
+		items: [
+			{
+				name: "Default",
+				demo: <Badge>Default</Badge>,
+				node: <NodeBadge>Default</NodeBadge>,
+			},
+			{
+				name: "Secondary",
+				demo: <Badge variant={"secondary"}>Secondary</Badge>,
+				node: <NodeBadge variant={"secondary"}>Secondary</NodeBadge>,
+			},
+			{
+				name: "Outline",
+				demo: <Badge variant={"outline"}>Outline</Badge>,
+				node: <NodeBadge variant={"outline"}>Outline</NodeBadge>,
+			},
+			{
+				name: "Destructive",
+				demo: <Badge variant={"destructive"}>Destructive</Badge>,
+				node: (
+					<NodeBadge variant={"destructive"}>Destructive</NodeBadge>
+				),
+			},
+		],
+	},
+	{
+		name: "Avatar",
+		items: [
+			{
+				name: "Default",
+				demo: (
+					<Avatar>
+						<AvatarImage src="https://github.com/shadcn.png" />
+						<AvatarFallback>CN</AvatarFallback>
+					</Avatar>
+				),
+				node: (
+					<NodeAvatar
+					// fallback="CN"
+					// ImageURL="https://github.com/shadcn.png"
+					// avatarALT="avatar"
+					>
+						<AvatarImage src="https://github.com/shadcn.png" />
+						<AvatarFallback>CN</AvatarFallback>
+					</NodeAvatar>
+				),
 			},
 		],
 	},

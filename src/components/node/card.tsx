@@ -84,14 +84,14 @@ export const NodeCard = ({ ...props }: NodeCardProps) => {
 	);
 };
 
-NodeCard.craft = {
-	...NodeCard.craft,
+(NodeCard as any).craft = {
+	...(NodeCard as any).craft,
 	displayName: "Card",
 	props: {
-		className: "p-6 m-2",
+		// className: "p-6 m-2",
 	},
 	custom: {
-		importPath: "@/components/card",
+		importPath: "@/components/ui/card",
 	},
 	related: {
 		toolbar: SettingsControl,

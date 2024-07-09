@@ -11,7 +11,7 @@ import {
 	TabletIcon,
 } from "lucide-react";
 import React, { useState } from "react";
-import { getOutputCode, getOutputHTMLFromId } from "@/lib/code-gen";
+import { getOutputCode } from "@/lib/code-gen";
 import { CodeView } from "./code-view";
 import {
 	DrawerTrigger,
@@ -35,8 +35,11 @@ export const Canvas = ({ children }: CanvasProps) => {
 		canUndo: query.history.canUndo(),
 		canRedo: query.history.canRedo(),
 	}));
+
+	console.log("All Nodes", query.getNodes());
+
 	const [codeOutput, setCodeOutput] = useState<string | null>();
-	const [htmlOutput, setHtmlOutput] = useState<string | null>();
+	// const [htmlOutput, setHtmlOutput] = useState<string | null>();
 
 	const generateCode = () => {
 		const { importString, output } = getOutputCode(query.getNodes());
@@ -46,14 +49,14 @@ export const Canvas = ({ children }: CanvasProps) => {
 		setCodeOutput(`${importString}\n\n${output}`);
 	};
 
-	const generateHTML = () => {
-		const htmlOutput = getOutputHTMLFromId("canvas-iframe");
+	// const generateHTML = () => {
+	// 	const htmlOutput = getOutputHTMLFromId("canvas-iframe");
 
-		setHtmlOutput(htmlOutput);
-	};
+	// 	setHtmlOutput(htmlOutput);
+	// };
 
 	const [codeOpen, setCodeOpen] = useState(false);
-	const [htmlOpen, setHtmlOpen] = useState(false);
+	// const [htmlOpen, setHtmlOpen] = useState(false);
 
 	const handleIconClick = (newWidth: string) => {
 		setCanvasWidth(newWidth);
@@ -99,9 +102,11 @@ export const Canvas = ({ children }: CanvasProps) => {
 								/>
 							</DrawerTrigger>
 
-							<DrawerContent className="max-h-[80vh]">
+							<DrawerContent className="max-h-[90vh]">
 								<DrawerHeader>
-									<DrawerTitle className="text-center font-semibold">TypeScript Code</DrawerTitle>
+									<DrawerTitle className="text-center font-semibold">
+										TypeScript Code
+									</DrawerTitle>
 								</DrawerHeader>
 								<CodeView codeString={codeOutput as string} />
 							</DrawerContent>
@@ -158,7 +163,7 @@ export const Canvas = ({ children }: CanvasProps) => {
 				</div>
 
 				<div
-					className={`${canvasWidth} transition-all w-full flex-1 bg-white rounded-b-lg overflow-auto border border-t-0 border-gray-200 p-2 relative `}
+					className={`${canvasWidth} transition-all w-full flex-1 bg-white rounded-b-lg overflow-auto border border-t-0 border-gray-200 p-2 relative space-y-4`}
 					ref={(ref) => {
 						if (ref) {
 							connect(drag(ref));

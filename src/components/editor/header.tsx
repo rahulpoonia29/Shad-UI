@@ -9,8 +9,8 @@ export const Header = () => {
 	return (
 		<nav className="flex items-center justify-between p-4 w-full border-b">
 			<Link href="/" className="flex items-center space-x-2">
-				<Command className="h-8 w-8" />
-				<h2 className="text-xl font-semibold">Drag-cn</h2>
+				<Command className="h-6 w-6" />
+				<h2 className="text-xl font-semibold">ShadUI</h2>
 			</Link>
 			{/* <ThemeToggle /> */}
 		</nav>

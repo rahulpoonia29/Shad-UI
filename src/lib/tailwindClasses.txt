@@ -1,8 +1,8 @@
-export const suggestions = [
   /* Aspect Ratio */
   "aspect-auto",
   "aspect-video",
   "aspect-square",
+  
   /* Container */
   "container",
   "mx-auto",
@@ -9028,4 +9028,3 @@ export const suggestions = [
   /* Screen Readers */
   "sr-only",
   "not-sr-only",
-];
