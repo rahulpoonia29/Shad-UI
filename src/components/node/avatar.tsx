@@ -52,7 +52,7 @@ const AvatarSettings = () => {
 				onChange={(e) =>
 					setProp(
 						(props: AvatarProps) =>
-							(props.ImageURL = e.target.value)
+							(props.ImageURL = e.target.value),
 					)
 				}
 			/>
@@ -63,7 +63,7 @@ const AvatarSettings = () => {
 				onChange={(e) =>
 					setProp(
 						(props: AvatarProps) =>
-							(props.avatarALT = e.target.value)
+							(props.avatarALT = e.target.value),
 					)
 				}
 			/>
@@ -74,7 +74,7 @@ const AvatarSettings = () => {
 				onChange={(e) =>
 					setProp(
 						(props: AvatarProps) =>
-							(props.fallback = e.target.value)
+							(props.fallback = e.target.value),
 					)
 				}
 			/>

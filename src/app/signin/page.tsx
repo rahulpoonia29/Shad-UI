@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { z } from "zod";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -38,8 +38,38 @@ const formSchema = z.object({
 });
 
 export default function Profile() {
-	const [loading, setLoading] = useState(false);
 	const router = useRouter();
+
+	// Check if the user is already signed in
+	const session = useSession();
+
+	if (session.status === "loading") {
+		return (
+			<div className="min-h-[calc(100vh-64px)] my-10 sm:my-0 grid items-center justify-center">
+				<LoaderCircle className="animate-spin duration-75" />
+			</div>
+		);
+	}
+
+	if (session.status === "authenticated") {
+		router.push("/dashboard");
+		toast.warning("You are already signed in", {
+			description:
+				"You are already signed in. Redirecting to dashboard...",
+			position: "top-center",
+			richColors: true,
+			action: {
+				label: "Close",
+				onClick: () => {},
+				actionButtonStyle: {
+					cursor: "pointer",
+				},
+			},
+		});
+		return null;
+	}
+
+	const [loading, setLoading] = useState(false);
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -61,6 +91,7 @@ export default function Profile() {
 
 			if (signInResponse && !signInResponse.error) {
 				router.push("/dashboard");
+				router.refresh();
 				toast.success("Log in successful", {
 					description: "You can now use your account.",
 					position: "top-center",
@@ -106,7 +137,7 @@ export default function Profile() {
 	}
 
 	return (
-		<div className="h-screen grid items-center justify-center">
+		<div className="min-h-[calc(100vh-64px)] my-10 sm:my-0 grid items-center justify-center">
 			<Card className="m-4 max-w-lg">
 				<CardHeader>
 					<CardTitle className="text-2xl">Sign In</CardTitle>

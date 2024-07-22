@@ -49,16 +49,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 					const isValid = await bcrypt.compare(
 						password,
-						user.password as string
+						user.password as string,
 					);
 
-					if (!isValid) return null;
+					if (!isValid) return new Error("Invalid credentials");
 
 					return user;
 				} catch (error: any) {
 					console.error(
 						"Error during authentication:",
-						error.message
+						error.message,
 					);
 					throw null;
 				}
@@ -74,7 +74,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		signIn: "/signin",
 		// error: "/error", // Error page
 	},
-	debug: process.env.NODE_ENV === "development",
+	// debug: process.env.NODE_ENV === "development",
 });
 
 export async function getSessionServer() {

@@ -1,9 +1,5 @@
 import React, { forwardRef, PropsWithChildren } from "react";
-import {
-	useEditor,
-	useNode,
-	UserComponent,
-} from "@craftjs/core";
+import { useEditor, useNode, UserComponent } from "@craftjs/core";
 
 const BUTTON_PATH = "@/components/button";
 const CARD_PATH = "@/components/ui/card";
@@ -25,7 +21,7 @@ type WithNodeOptions = {
 
 export const withNode = <T extends {}>(
 	Component: UserComponent<T>,
-	options: WithNodeOptions = {}
+	options: WithNodeOptions = {},
 ): UserComponent<T & { children?: React.ReactNode }> => {
 	const { draggable = true, droppable = true } = options;
 

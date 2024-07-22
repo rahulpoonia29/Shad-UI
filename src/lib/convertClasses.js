@@ -35,7 +35,7 @@ fs.readFile(filePath, "utf8", (err, data) => {
 					.replace(/^["'’‘“”«»„‚‛`´,]+|["'’‘“”«»„‚‛`´,]+$/g, "")
 					.trim();
 				structuredData[structuredData.length - 1].classes.push(
-					className
+					className,
 				);
 			}
 		}
@@ -53,6 +53,6 @@ fs.readFile(filePath, "utf8", (err, data) => {
 			} else {
 				console.log("Classes saved to tailwindClasses.json");
 			}
-		}
+		},
 	);
 });

@@ -5,7 +5,7 @@ let imports: { displayName: string; importPath: string }[] = [];
 const generateComponentCode = (
 	nodesMap: Nodes,
 	nodeId: string,
-	level: number
+	level: number,
 ): string => {
 	const node = nodesMap[nodeId];
 	const { displayName, props, nodes, linkedNodes, custom } = node.data;
@@ -20,7 +20,7 @@ const generateComponentCode = (
 			/\{\$(.*?)\}/g,
 			(match: string, p1: string) => {
 				return props[p1] || "";
-			}
+			},
 		);
 
 		// Apply indentation
@@ -45,12 +45,12 @@ const generateComponentCode = (
 		// No child nodes, return the self-closing tag
 		return `${indentation}${openingTag}${generateChildString(
 			props.children,
-			level + 1
+			level + 1,
 		)}${closingTag}`;
 	} else {
 		// Has child nodes, recursively generate code for children
 		const childComponents = nodes.map((childId) =>
-			generateComponentCode(nodesMap, childId, level + 1)
+			generateComponentCode(nodesMap, childId, level + 1),
 		);
 
 		const childComponentsString = childComponents.length
@@ -58,7 +58,7 @@ const generateComponentCode = (
 			: "";
 
 		const linkedChildComponents = Object.entries(linkedNodes).map(
-			([key, value]) => generateComponentCode(nodesMap, value, level + 1)
+			([key, value]) => generateComponentCode(nodesMap, value, level + 1),
 		);
 
 		const linkedChildComponentsString = linkedChildComponents.length
@@ -88,7 +88,7 @@ const getIndentation = (level: number): string => {
 
 const generateChildString = (
 	children: string | Node[] | undefined,
-	level: number
+	level: number,
 ): string => {
 	if (typeof children === "string") {
 		// If children is a string, return it directly
@@ -96,7 +96,7 @@ const generateChildString = (
 	} else if (Array.isArray(children) && children.length > 0) {
 		return children
 			.map((child) =>
-				generateComponentCode({ TEMP: child }, "TEMP", level)
+				generateComponentCode({ TEMP: child }, "TEMP", level),
 			)
 			.join("");
 	} else {
@@ -111,7 +111,7 @@ interface ComponentInfo {
 
 const generateImportStatements = (components: ComponentInfo[]): string => {
 	const filteredComponents = components.filter(
-		(comp) => !["div", "span", "p"].includes(comp.displayName)
+		(comp) => !["div", "span", "p"].includes(comp.displayName),
 	);
 
 	const groupedComponents: { [key: string]: ComponentInfo[] } = {};

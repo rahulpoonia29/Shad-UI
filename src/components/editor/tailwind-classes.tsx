@@ -10,7 +10,6 @@ type Props = {
 export default function TailwindClasses({ options }: Props) {
 	const { query, actions } = useEditor();
 
-
 	const {
 		classNames,
 		actions: { setProp },
@@ -53,7 +52,7 @@ export default function TailwindClasses({ options }: Props) {
 			value={value}
 			classNames={{
 				menuButton: (
-					value?: { isDisabled?: boolean | undefined } | undefined
+					value?: { isDisabled?: boolean | undefined } | undefined,
 				) =>
 					`flex text-sm text-gray-500 border border-gray-300 rounded shadow-sm transition-all duration-300 focus:outline-none ${
 						value?.isDisabled
@@ -93,7 +92,8 @@ export default function TailwindClasses({ options }: Props) {
 
 				if (!option) {
 					setProp(
-						(props: { className: string }) => (props.className = "")
+						(props: { className: string }) =>
+							(props.className = ""),
 					);
 				}
 

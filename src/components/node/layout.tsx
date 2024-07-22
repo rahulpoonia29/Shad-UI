@@ -12,7 +12,7 @@ export const OneBlock = React.forwardRef<HTMLDivElement, OneBlockProps>(
 	({ ...props }, ref) => {
 		const Comp = "div";
 		return <Comp ref={ref} {...props} />;
-	}
+	},
 );
 
 OneBlock.displayName = "div";

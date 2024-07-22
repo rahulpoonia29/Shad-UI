@@ -116,8 +116,8 @@ export const SettingsControl = () => {
 								(props: { children: ReactNode }) =>
 									(props.children = e.target.value.replace(
 										/<\/?[^>]+(>|$)/g,
-										""
-									))
+										"",
+									)),
 							)
 						}
 					/>

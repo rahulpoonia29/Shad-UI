@@ -86,7 +86,10 @@ export default function Index() {
 										avatarALT="avatar"
 									/> */}
 									{/* <NodeCard></NodeCard> */}
-									<NodeAlert alertTitle="Title" alertDescription="description" />
+									<NodeAlert
+										alertTitle="Title"
+										alertDescription="description"
+									/>
 								</Element>
 							</Frame>
 						</ReactIframe>
@@ -96,5 +99,6 @@ export default function Index() {
 				</div>
 			</Editor>
 		</section>
+		// <div>Editor</div>
 	);
 }

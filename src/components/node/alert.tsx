@@ -74,7 +74,7 @@ const AlertSettings = () => {
 				onChange={(e) =>
 					setProp(
 						(props: AlertProps) =>
-							(props.alertTitle = e.target.value)
+							(props.alertTitle = e.target.value),
 					)
 				}
 			/>
@@ -85,7 +85,7 @@ const AlertSettings = () => {
 				onChange={(e) =>
 					setProp(
 						(props: AlertProps) =>
-							(props.alertDescription = e.target.value)
+							(props.alertDescription = e.target.value),
 					)
 				}
 			/>

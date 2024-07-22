@@ -1,67 +1,19 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { Bell } from "lucide-react";
 import { User } from "next-auth";
-import Logout from "./logout";
+import Profile from "./Profile";
+import Breadcrumb from "./breadcrumb";
 
 type Props = {
-	user: User;
+    user: User;
 };
 
 function UserMenu({ user }: Props) {
-	return (
-		<div className="flex">
-			<Avatar className="mr-2">
-				<AvatarImage src={user.image as string} alt="@profileImg" />
-				<AvatarFallback>
-					{user.name
-						? user.name.charAt(0) +
-						  (user.name.indexOf(" ") !== -1
-								? user.name.charAt(user.name.indexOf(" ") + 1)
-								: "")
-						: ""}
-				</AvatarFallback>
-			</Avatar>
-
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Button
-						variant="ghost"
-						className="group text-md flex gap-1 pr-2 transition-all "
-					>
-						{user.name?.split(" ")[0]}
-						<ChevronRight className="h-4 w-4 group-hover:rotate-90 transition-all" />
-					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent className="mt-4 mr-10 w-40 text-lg">
-					<DropdownMenuLabel>My Account</DropdownMenuLabel>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem asChild className="cursor-pointer">
-						{/* <Link href={`/profile/${userData?.$id}`}>Profile</Link> */}
-					</DropdownMenuItem>
-					<DropdownMenuItem asChild className="cursor-pointer">
-						<Link href={"/new"}>Create New Post</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem className="cursor-pointer">
-						Settings
-					</DropdownMenuItem>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem asChild>
-						<Logout />
-					</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
-		</div>
-	);
+    return (
+        <div className="mr-6 flex h-5 items-center space-x-6 text-gray-500">
+            <Bell className="size-8 cursor-pointer rounded-lg border-2 border-gray-500 bg-amber-200/30 p-1.5 text-yellow-400 transition-colors hover:bg-amber-200/50 hover:text-yellow-500" />
+            <Profile user={user} />
+        </div>
+    );
 }
 
 export default UserMenu;

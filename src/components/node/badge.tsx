@@ -51,7 +51,7 @@ const BadgeSettings = () => {
 				name="variant"
 				defaultValue={variant}
 				onValueChange={(
-					value: "default" | "secondary" | "outline" | "destructive"
+					value: "default" | "secondary" | "outline" | "destructive",
 				) => {
 					setProp(
 						(props: {
@@ -60,7 +60,7 @@ const BadgeSettings = () => {
 								| "secondary"
 								| "outline"
 								| "destructive";
-						}) => (props.variant = value)
+						}) => (props.variant = value),
 					);
 				}}
 			>

@@ -5,7 +5,7 @@ type Props = {};
 
 async function Home({}: Props) {
 	const session = await auth();
-	
+
 	if (!session?.user) {
 		return (
 			<>
