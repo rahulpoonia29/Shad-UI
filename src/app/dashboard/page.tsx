@@ -1,17 +1,12 @@
-import { auth, getSessionServer, signIn, signOut } from "@/auth";
-import Navbar from "@/components/navbar/navbar";
-import UserMenu from "@/components/navbar/userMenu";
-import { Button } from "@/components/ui/button";
-import { dbConnect } from "@/lib/dbConnect";
-import { Command, Pen } from "lucide-react";
-import Link from "next/link";
+import { auth } from "@/auth";
+import prisma from "@/lib/prismaClient";
 import React, { Suspense } from "react";
 import ComponentCard from "./component";
+import { Component } from "@prisma/client";
 
 type Props = {};
 
 async function Home({}: Props) {
-    const prisma = await dbConnect();
     const session = await auth();
 
     const components = await prisma.component.findMany({
@@ -21,15 +16,16 @@ async function Home({}: Props) {
         },
     });
 
-    // console.log("components:", components);
-
     return (
-        <section className="p-3 w-full bg-red-400">
+        <section className="w-full p-3">
             <h1 className="text-lg font-semibold">Your components:</h1>
-            <section className="flex w-full gap-2">
+            <section className="mt-2 grid w-full grid-cols-1 gap-2 overflow-hidden md:grid-cols-2 lg:grid-cols-3">
                 <Suspense fallback={<div>Loading...</div>}>
                     {components.map((component) => (
-                        <ComponentCard key={component.id} component={component} />
+                        <ComponentCard
+                            key={component.id}
+                            component={component as Component}
+                        />
                     ))}
                 </Suspense>
             </section>

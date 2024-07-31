@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function TailwindClasses({ options }: Props) {
-	const { query, actions } = useEditor();
 
 	const {
 		classNames,

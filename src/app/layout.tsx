@@ -26,7 +26,7 @@ export default async function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <SessionProvider session={session}>
-                    <div className="grid h-screen w-screen grid-cols-[200px_minmax(0, 1fr)]">
+                    <div className="grid h-screen w-screen grid-cols-[200px_1fr]">
                         <Sidemenu />
                         <div className="bg-gray-200">
                             <Navbar />
